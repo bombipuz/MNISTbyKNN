@@ -1,6 +1,7 @@
 package fintask.knnclassifier;
 
 import fintask.dataset.Dataset;
+import fintask.knnclassifier.distance.Distance;
 
 import java.util.*;
 
@@ -56,7 +57,7 @@ public class ClassifierKNN {
     private Map<Double, List<String>> DistanceLabelMap(final double[] imgs) {
         final Map<Double, List<String>> map = new TreeMap<>();
         for (int i = 0; i < TrainLabels.size(); i++) {
-            final double dist = distance.getEuclidean(imgs, TrainImages.get(i));
+            final double dist = distance.calculate(imgs, TrainImages.get(i));
             final List<String> labels = map.getOrDefault(dist, new ArrayList<>());
             labels.add(TrainLabels.get(i));
             map.put(dist, labels);

@@ -2,9 +2,10 @@ package fintask;
 
 import fintask.dataset.Dataset;
 import fintask.dataset.MNISTset;
+import fintask.knnclassifier.distance.Euclidean;
 import fintask.knnclassifier.threading.AccuracyInThreads ;
 import fintask.knnclassifier.ClassifierKNN;
-import fintask.knnclassifier.Distance;
+import fintask.knnclassifier.distance.Distance;
 
 
 import java.io.*;
@@ -14,10 +15,10 @@ import java.io.InputStream;
 public class Main {
 
     public static void main(String[] args) throws IOException{
-        String Train_Label_Path="C:\\ShumiT\\Java\\itmoRP\\MNISTbyKNN\\src\\loadres\\train-labels.idx1-ubyte";
-        String Train_Image_Path="C:\\ShumiT\\Java\\itmoRP\\MNISTbyKNN\\src\\loadres\\train-images.idx3-ubyte";
-        String Test_Label_Path="C:\\ShumiT\\Java\\itmoRP\\MNISTbyKNN\\src\\loadres\\t10k-labels.idx1-ubyte";
-        String Test_Image_Path="C:\\ShumiT\\Java\\itmoRP\\MNISTbyKNN\\src\\loadres\\t10k-images.idx3-ubyte";
+        String Train_Label_Path="data\\loadres\\train-labels.idx1-ubyte";
+        String Train_Image_Path="data\\loadres\\train-images.idx3-ubyte";
+        String Test_Label_Path="data\\loadres\\t10k-labels.idx1-ubyte";
+        String Test_Image_Path="data\\loadres\\t10k-images.idx3-ubyte";
         int k=4;
         int NumberOfThreads=5;
             System.out.println("Program started...");
@@ -27,7 +28,7 @@ public class Main {
             Dataset testDataset = DatasetParsing(Test_Label_Path,Test_Image_Path);
             System.out.println("\tTest Data parsed!");
 
-        ClassifierKNN knn=new ClassifierKNN(new Distance());
+        ClassifierKNN knn=new ClassifierKNN(new Euclidean()); // or new Manhattan(), or another one
         knn.SeedData(trainDataset);
         System.out.println("Train data loaded to classifier");
         System.out.println("Classifying test set...");
